@@ -6,6 +6,8 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import HomePage from "./components/HomePage";
 import ForgotPassword from "./components/ForgotPassword";
+import OTP from "./components/OTP";
+import ResetPassword from "./components/ResetPassword";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("loggedIn"));
@@ -24,6 +26,8 @@ function App() {
         <Routes>
           <Route path="/" element={loggedIn ? <HomePage /> : <Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/otp" element={<OTP />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
         </Routes>
       </Router>
     </>
