@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import OtpInput from "react-otp-input";
 
 import image from "/assets/photo_2023-12-02_23-35-33.png";
 
