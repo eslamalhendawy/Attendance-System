@@ -18,7 +18,7 @@ function OTP() {
 
   return (
     <section className="minHeight flex items-center justify-center px-6">
-      <div className="container mx-auto bg-whitepy-6 px-6 md:py-0 md:px-0 rounded-xl md:flex gap-6 items-center loginShadow">
+      <div className="container mx-auto bg-white py-6 px-6 md:py-0 md:px-0 rounded-xl md:flex gap-6 items-center loginShadow">
         <div className="hidden md:block md:basis-1/2">
           <img src={image} alt="" />
         </div>
