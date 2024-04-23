@@ -5,6 +5,13 @@ import image from "/assets/loginImage.png";
 
 const Login = () => {
   const { userData, setUserData } = useAppContext();
+
+  const handleLogin = () => {
+    setUserData({ ...userData, loggedIn: true });
+    localStorage.setItem("loggedIn", true);
+    console.log(userData.loggedIn);
+  }
+
   return (
     <section className="minHeight flex items-center justify-center px-6">
       <div className="container mx-auto bg-white py-6 px-6 md:py-0 md:px-0 rounded-xl md:flex gap-6 items-center loginShadow">
@@ -28,7 +35,7 @@ const Login = () => {
             </div>
             <Link to="/forgot-password" className="text-accent">Forgot Password ?</Link>
           </div>
-          <button className="bg-accent hover:bg-primary duration-300 text-white py-3 px-12 rounded-xl text-xl block w-full md:w-[80%] xl:w-[60%]">Sign in</button>
+          <button onClick={handleLogin} className="bg-accent hover:bg-primary duration-300 text-white py-3 px-12 rounded-xl text-xl block w-full md:w-[80%] xl:w-[60%]">Sign in</button>
         </div>
       </div>
     </section>

@@ -24,7 +24,7 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={loggedIn ? <HomePage /> : <Login />} />
+          <Route path="/" element={userData.loggedIn ? <HomePage /> : <Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/otp" element={<OTP />} />
           <Route path="/reset-password" element={<ResetPassword />} />
