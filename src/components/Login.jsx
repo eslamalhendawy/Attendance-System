@@ -27,7 +27,7 @@ const Login = () => {
           </div>
           <div className="flex items-center gap-4 border-b border-black pb-2 px-2 mb-8 w-full md:w-[80%] xl:w-[60%]">
             <i className="fa-solid fa-lock"></i>
-            <input type="text" className="outline-none lg:text-lg" placeholder="Password"/>
+            <input type="password" className="outline-none lg:text-lg" placeholder="Password"/>
           </div>
           <div className="flex items-center justify-between w-full md:w-[80%] xl:w-[60%] mb-6">
             <div className="flex items-center gap-2">
