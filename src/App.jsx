@@ -8,6 +8,8 @@ import HomePage from "./components/HomePage";
 import ForgotPassword from "./components/ForgotPassword";
 import OTP from "./components/OTP";
 import ResetPassword from "./components/ResetPassword";
+import SideMenu from "./components/SideMenu";
+import Course from "./components/Course";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("loggedIn"));
@@ -23,12 +25,16 @@ function App() {
     <>
       <Router>
         <Header />
-        <Routes>
-          <Route path="/" element={userData.loggedIn ? <HomePage /> : <Login />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/otp" element={<OTP />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-        </Routes>
+        <div className={loggedIn && "flex gap-[40px] p-6"}>
+          {userData.loggedIn && <SideMenu />}
+          <Routes>
+            <Route path="/" element={userData.loggedIn ? <HomePage /> : <Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/otp" element={<OTP />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/course/:id" element={<Course />} />
+          </Routes>
+        </div>
       </Router>
     </>
   );

@@ -9,3 +9,7 @@
 .loginShadow{
   box-shadow: 0px 0px 4px 0px #00000040;
 }
+
+.sideMenuHeight{
+  height: calc(100vh - 104px);
+}

@@ -6,6 +6,7 @@ export const AppProvider = ({ children }) => {
   const [userData, setUserData] = useState({
     name: "",
     email: "",
+    role: "",
     loggedIn: false,
   });
   return <AppContext.Provider value={{ userData, setUserData }}>{children}</AppContext.Provider>;

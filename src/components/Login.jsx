@@ -9,6 +9,7 @@ const Login = () => {
   const handleLogin = () => {
     setUserData({ ...userData, loggedIn: true });
     localStorage.setItem("loggedIn", true);
+    localStorage.setItem("role", "doctor");
     console.log(userData.loggedIn);
   }
 
