@@ -1,10 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { postData } from "../apiRequest/Services";
+
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import image from "/assets/otpImage.png";
 
 function OTP() {
   const [otp, setOtp] = useState(new Array(4).fill(""));
+  const email = localStorage.getItem("email");
+  const navigate = useNavigate();
 
   const handleChange = (e, i) => {
     setOtp([...otp.map((data, index) => (index === i ? e.target.value : data))]);
@@ -15,6 +21,29 @@ function OTP() {
       e.target.previousElementSibling.focus();
     }
   };
+
+  const handleClick = async () => {
+    if (otp.join("").length < 4) {
+      toast.error("Please Enter the OTP");
+      return;
+    }
+    toast.info("Verifying...");
+    let temp = await postData("/confirmPasswordResetCodeForDoctors", { confirmCode: Number(otp.join("")), email });
+    if(temp.status === "success"){
+      toast.success(temp.message);
+      navigate("/reset-password");
+    }else{
+      toast.error("Something went wrong please try again");
+    }
+  }
+
+  const handleResend = async () => {
+    toast.info("Sending mail...");
+    let temp = await postData("/forgotPassword", { email });
+    if(temp.status === "success"){
+      toast.success(temp.message);
+    }
+  }
 
   return (
     <section className="minHeight flex items-center justify-center px-6">
@@ -31,12 +60,12 @@ function OTP() {
             ))}
           </div>
           <div className="w-full md:w-[80%] xl:w-[60%] text-center">
-            <span className=" text-accent cursor-pointer">Resend</span>
+            <button onClick={handleResend} className=" text-accent cursor-pointer">Resend</button>
           </div>
           <div className="md:w-[80%] xl:w-[60%] mt-10">
-            <Link to="/reset-password" className="text-center bg-accent hover:bg-primary duration-300 text-white py-3 px-12 rounded-xl text-xl block w-full">
+            <button onClick={handleClick} to="/reset-password" className="text-center bg-accent hover:bg-primary duration-300 text-white py-3 px-12 rounded-xl text-xl block w-full">
               Verify
-            </Link>
+            </button>
           </div>
         </div>
       </div>
