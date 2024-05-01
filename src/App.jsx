@@ -13,6 +13,7 @@ import OTP from "./components/OTP";
 import ResetPassword from "./components/ResetPassword";
 import SideMenu from "./components/SideMenu";
 import Course from "./components/Course";
+import Lecture from "./components/Lecture";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("doctorID"));
@@ -28,7 +29,7 @@ function App() {
     <>
       <Router>
         <Header />
-        <div className={loggedIn ? "flex gap-[40px] p-6" : ""}>
+        <div className={loggedIn ? "flex gap-[40px] p-6 bg-[#EEF5FF]" : ""}>
           {userData.loggedIn && <SideMenu />}
           <Routes>
             <Route path="/" element={userData.loggedIn ? <HomePage /> : <Login />} />
@@ -36,6 +37,7 @@ function App() {
             <Route path="/otp" element={<OTP />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/course/:id" element={<Course />} />
+            <Route path="/lecture/:id" element={<Lecture />} />
           </Routes>
         </div>
       </Router>

@@ -12,6 +12,7 @@ const Login = () => {
   const { userData, setUserData } = useAppContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
     if (email === "" || password === "") {
@@ -19,13 +20,15 @@ const Login = () => {
       return;
     }
     toast.info("Logging in...");
-    let temp = await postData("/login", { email, password });
+    setLoading(true);
+    let temp = await postData("doctors/login", { email, password });
     if(temp.status === "success") {
       toast.success("Logged in successfully");
       setUserData({ ...userData, loggedIn: true });
       localStorage.setItem("doctorID", temp.token);
     }else{
       toast.error("Invalid email or password");
+      setLoading(false);
     }
   }
 
@@ -52,7 +55,7 @@ const Login = () => {
             </div>
             <Link to="/forgot-password" className="text-accent">Forgot Password ?</Link>
           </div>
-          <button onClick={handleLogin} className="bg-accent hover:bg-primary duration-300 text-white py-3 px-12 rounded-xl text-xl block w-full md:w-[80%] xl:w-[60%]">Sign in</button>
+          <button disabled={loading} onClick={handleLogin} className={`bg-accent hover:bg-primary duration-300 text-white py-3 px-12 rounded-xl text-xl block w-full md:w-[80%] xl:w-[60%] ${loading && "bg-primary"}`}>{loading ? "Please Wait" : "Sign In"}</button>
         </div>
       </div>
     </section>
