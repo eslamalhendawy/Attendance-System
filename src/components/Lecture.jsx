@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { getData } from "../apiRequest/Services";
-import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+
+import QrCode from "./QrCode";
 
 const Lecture = () => {
   const [loading, setLoading] = useState(true);
@@ -30,9 +31,7 @@ const Lecture = () => {
           <h2 className="text-center font-bold text-2xl mb-20">Title : {lecture.title}</h2>
           <div className="flex items-center justify-center gap-8">
             <button className="bg-accent hover:bg-primary duration-200 text-center py-3 px-6 rounded-lg text-white">View Attendance</button>
-            <button className="bg-accent hover:bg-primary duration-200 text-center py-3 px-6 rounded-lg text-white">
-              <i className="fa-solid fa-qrcode mr-2"></i>Take Attendance
-            </button>
+            <QrCode courseID={lecture.courseId} />
           </div>
         </div>
       )}

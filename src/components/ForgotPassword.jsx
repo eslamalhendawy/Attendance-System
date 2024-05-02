@@ -22,7 +22,8 @@ const ForgotPassword = () => {
       return;
     }
     toast.info("Sending mail...");
-    let temp = await postData("/forgotPassword", { email });
+    let temp = await postData("doctors/forgotPassword", { email });
+    console.log(temp);
     if(temp.status === "success"){
       toast.success(temp.message);
       localStorage.setItem("email", email);

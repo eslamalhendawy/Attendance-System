@@ -23,7 +23,7 @@ const ResetPassword = () => {
       return;
     }
     toast.info("Resetting password...");
-    let temp = await postData("/passwordResetForDoctors", { email, password, passwordConfirm: confirmPassword});
+    let temp = await postData("doctors/passwordResetForDoctors", { email, password, passwordConfirm: confirmPassword});
     if(temp.status === "success"){
       toast.success(temp.message);
       localStorage.removeItem("email");

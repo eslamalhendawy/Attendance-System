@@ -28,7 +28,7 @@ function OTP() {
       return;
     }
     toast.info("Verifying...");
-    let temp = await postData("/confirmPasswordResetCodeForDoctors", { confirmCode: Number(otp.join("")), email });
+    let temp = await postData("doctors/confirmPasswordResetCodeForDoctors", { confirmCode: Number(otp.join("")), email });
     if(temp.status === "success"){
       toast.success(temp.message);
       navigate("/reset-password");

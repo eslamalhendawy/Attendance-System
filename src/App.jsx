@@ -14,6 +14,7 @@ import ResetPassword from "./components/ResetPassword";
 import SideMenu from "./components/SideMenu";
 import Course from "./components/Course";
 import Lecture from "./components/Lecture";
+import Profile from "./components/Profile";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("doctorID"));
@@ -38,6 +39,7 @@ function App() {
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/course/:id" element={<Course />} />
             <Route path="/lecture/:id" element={<Lecture />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </div>
       </Router>

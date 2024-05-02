@@ -12,7 +12,7 @@ const SideMenu = () => {
   useEffect(() => {
     const getDoctorData = async () => {
       const response = await getData("doctors/viewProfileForDoctors", doctorID);
-      setUserData({ ...userData, name: response.data.doctor.name, email: response.data.doctor.email, role: "doctor", courses: response.data.doctor.courses, avatar: response.data.doctor.avatar });
+      setUserData({ ...userData, name: response.data.doctor.name, email: response.data.doctor.email, role: "doctor", courses: response.data.doctor.courses, avatar: response.data.doctor.profilePicture });
       setLoading(false);
     };
     getDoctorData();
@@ -27,10 +27,10 @@ const SideMenu = () => {
 
   return (
     <aside className="sideMenuHeight bg-primary sticky top-4 left-0 py-4 pl-4 px-8 rounded-lg flex flex-col gap-4 w-fit">
-      <div className="flex items-center gap-2">
-        <div>{userData.avatar ? <img src={userData.avatar} className="size-[50px]ck rounded-full" /> : <div className="size-[50px] bg-black rounded-full" />}</div>
-        <h4 className="font-bold">{loading ? "Loading" : userData.name}</h4>
-      </div>
+      <Link to="/profile" className="flex items-center gap-2">
+        <div>{userData.avatar ? <img src={userData.avatar} className="size-[50px] rounded-full" /> : <div className="size-[50px] bg-accent rounded-full" />}</div>
+        <h4 className="font-bold capitalize">{loading ? "Loading" : userData.name}</h4>
+      </Link>
       <div className="flex flex-col justify-between flex-grow">
         <div>
           {/* <span className="font-[600] text-lg mb-4 block">My Courses</span> */}
