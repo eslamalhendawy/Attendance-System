@@ -14,18 +14,6 @@ const Lecture = () => {
   const [loading2, setLoading2] = useState(false);
   const [attendance, setAttendance] = useState([]);
   const { id } = useParams();
-  const tempList = [
-    {
-      name: "Test",
-      id: "1",
-      status: "Present",
-    },
-    {
-      name: "Test2",
-      id: "12",
-      status: "Present",
-    },
-  ];
 
   useEffect(() => {
     const fetchLectureData = async () => {
