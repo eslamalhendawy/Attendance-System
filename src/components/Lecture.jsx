@@ -57,7 +57,7 @@ const Lecture = () => {
                 <p>Loading...</p>
               ) : (
                 <Table dataSource={attendance} pagination={false}>
-                  <Table.Column title="Name" dataIndex="name" key="name" />
+                  <Table.Column title="Name" dataIndex="name" key="name" className="capitalize" />
                   <Table.Column title="ID" dataIndex="id" key="id" />
                   <Table.Column title="Status" dataIndex="status" key="status" />
                   <Table.Column
