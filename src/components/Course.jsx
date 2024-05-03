@@ -11,6 +11,7 @@ const Course = () => {
   useEffect(() => {
     const fetchDoctorData = async () => {
       const response = await getData(`courses/${id}`, doctorID);
+      console.log(response);
       if (response.status === "success") {
         setCourseData(response.data.course);
         setLoading(false);

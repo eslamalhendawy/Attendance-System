@@ -35,7 +35,7 @@ export const getData = async (url, token) => {
 
 export const updateData = async (url, data, token) => {
   let response = [];
-  await axios.put(`${baseURL}/${url}`, data, {
+  await axios.patch(`${baseURL}/${url}`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
