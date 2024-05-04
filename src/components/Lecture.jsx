@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getData } from "../apiRequest/Services";
 import { useParams } from "react-router-dom";
 
-import { Table } from "antd";
+import { Input, Table } from "antd";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import QrCode from "./QrCode";
 
 const Lecture = () => {
+  const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(true);
   const [lecture, setLecture] = useState({});
   const doctorID = localStorage.getItem("doctorID");
@@ -33,19 +34,19 @@ const Lecture = () => {
     setHidden(false);
     const response = await getData(`doctors/viewLectureAttendance/${id}`, doctorID);
     let temp = response.data.attendanceRecords.map((record) => {
-      return {name: record.studentName, code: record.studentCode, status: record.status, id: record._id};
-    })
+      return { name: record.studentName, code: record.studentCode, status: record.status, key: record._id };
+    });
     setAttendance(temp);
   };
 
   const editAttendance = async (record) => {
     toast.info("Updating...");
-    let response = await getData(`doctors/changeStudentAttendance/${record.id}`, doctorID);
-    if(response.status === "success") {
+    let response = await getData(`doctors/changeStudentAttendance/${record.key}`, doctorID);
+    if (response.status === "success") {
       fetchAttendance();
       toast.success("Updated successfully");
     }
-  }
+  };
 
   return (
     <div className="grow py-20">
@@ -66,21 +67,34 @@ const Lecture = () => {
               {loading2 ? (
                 <p>Loading...</p>
               ) : (
-                <Table className="capitalize" dataSource={attendance} pagination={false}>
-                  <Table.Column title="Name" dataIndex="name" key="name" />
-                  <Table.Column title="ID" dataIndex="code" key="code" />
-                  <Table.Column title="Status" dataIndex="status" key="status" />
-                  <Table.Column
-                    title="Edit"
-                    dataIndex="edit"
-                    key="edit"
-                    render={(_, record) => (
-                      <div>
-                        <i onClick={() => editAttendance(record)} className="fa-solid fa-pen cursor-pointer"></i>
-                      </div>
-                    )}
-                  />
-                </Table>
+                <>
+                  <div className="flex justify-center mb-8">
+                    <input onChange={(e) => setQuery(e.target.value)} className="w-[60%] p-2 outline-none border-2" type="text" placeholder="Search..." />
+                  </div>
+                  <Table className="capitalize" dataSource={attendance} pagination={false}>
+                    <Table.Column
+                      title="Name"
+                      dataIndex="name"
+                      key="name"
+                      filteredValue={[query]}
+                      onFilter={(value, record) => {
+                        return record.name.toLowerCase().includes(value.toLowerCase());
+                      }}
+                    />
+                    <Table.Column title="ID" dataIndex="code" key="code" />
+                    <Table.Column title="Status" dataIndex="status" key="status" />
+                    <Table.Column
+                      title="Edit"
+                      dataIndex="edit"
+                      key="edit"
+                      render={(_, record) => (
+                        <div>
+                          <i onClick={() => editAttendance(record)} className="fa-solid fa-pen cursor-pointer"></i>
+                        </div>
+                      )}
+                    />
+                  </Table>
+                </>
               )}
             </div>
           )}
