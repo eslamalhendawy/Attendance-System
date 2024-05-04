@@ -31,7 +31,7 @@ const Lecture = () => {
     setLoading2(true);
     const response = await getData(`doctors/viewLectureAttendance/${id}`, doctorID);
     let temp = response.data.attendanceRecords.map((record) => {
-      return {name: record.studentName, id: record.id, status: record.status};
+      return {name: record.studentName, id: record.studentCode, status: record.status};
     })
     setAttendance(temp);
     setLoading2(false);

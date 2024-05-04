@@ -17,7 +17,7 @@ const ChangeAvatar = () => {
       toast.error("Please select a photo to upload");
       return;
     }
-    toast.info("Updating profile phhoto, please wait...");
+    toast.info("Updating profile photo, please wait...");
     const formData = new FormData();
     formData.append("profilePicture", newImage);
     setLoading(true);

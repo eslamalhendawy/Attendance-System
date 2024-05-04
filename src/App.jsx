@@ -15,6 +15,7 @@ import SideMenu from "./components/SideMenu";
 import Course from "./components/Course";
 import Lecture from "./components/Lecture";
 import Profile from "./components/Profile";
+import CourseAttendance from "./components/CourseAttendance";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("doctorID"));
@@ -40,6 +41,7 @@ function App() {
             <Route path="/course/:id" element={<Course />} />
             <Route path="/lecture/:id" element={<Lecture />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/course-attendance/:id" element={<CourseAttendance />} />
           </Routes>
         </div>
       </Router>
