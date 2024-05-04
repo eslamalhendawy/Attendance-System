@@ -4,6 +4,9 @@ import { useParams } from "react-router-dom";
 
 import { Table } from "antd";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import QrCode from "./QrCode";
 
 const Lecture = () => {
@@ -27,15 +30,22 @@ const Lecture = () => {
   }, []);
 
   const fetchAttendance = async () => {
-    setHidden(!hidden);
-    setLoading2(true);
+    setHidden(false);
     const response = await getData(`doctors/viewLectureAttendance/${id}`, doctorID);
     let temp = response.data.attendanceRecords.map((record) => {
-      return {name: record.studentName, id: record.studentCode, status: record.status};
+      return {name: record.studentName, code: record.studentCode, status: record.status, id: record._id};
     })
     setAttendance(temp);
-    setLoading2(false);
   };
+
+  const editAttendance = async (record) => {
+    toast.info("Updating...");
+    let response = await getData(`doctors/changeStudentAttendance/${record.id}`, doctorID);
+    if(response.status === "success") {
+      fetchAttendance();
+      toast.success("Updated successfully");
+    }
+  }
 
   return (
     <div className="grow py-20">
@@ -56,9 +66,9 @@ const Lecture = () => {
               {loading2 ? (
                 <p>Loading...</p>
               ) : (
-                <Table dataSource={attendance} pagination={false}>
-                  <Table.Column title="Name" dataIndex="name" key="name" className="capitalize" />
-                  <Table.Column title="ID" dataIndex="id" key="id" />
+                <Table className="capitalize" dataSource={attendance} pagination={false}>
+                  <Table.Column title="Name" dataIndex="name" key="name" />
+                  <Table.Column title="ID" dataIndex="code" key="code" />
                   <Table.Column title="Status" dataIndex="status" key="status" />
                   <Table.Column
                     title="Edit"
@@ -66,7 +76,7 @@ const Lecture = () => {
                     key="edit"
                     render={(_, record) => (
                       <div>
-                        <i className="fa-solid fa-pen"></i>
+                        <i onClick={() => editAttendance(record)} className="fa-solid fa-pen cursor-pointer"></i>
                       </div>
                     )}
                   />

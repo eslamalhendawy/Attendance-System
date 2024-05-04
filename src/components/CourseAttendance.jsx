@@ -28,19 +28,22 @@ const CourseAttendance = () => {
     const fetchCourseAttendance = async () => {
       const response = await getData(`doctors/viewCourseAttendance/${id}`, doctorID);
       if (response.success) {
-        const lectureNumbers = new Set();
+        const tempSet = new Set();
         response.data.attendance.forEach((student) => {
           student.attendances.forEach((attendance) => {
-            lectureNumbers.add(attendance.lectureNumber);
+            tempSet.add(attendance.lectureNumber);
           });
         });
+
+        const lectureNumbers = [...tempSet].sort((a, b) => a - b);
 
         let temp = [...lectureNumbers].map((lectureNumber) => ({
           title: `Lec ${lectureNumber}`,
           dataIndex: `lecture${lectureNumber}`,
           key: `lecture${lectureNumber}`,
-          render: (text, record) => (record[`lecture${lectureNumber}`] ? record[`lecture${lectureNumber}`] : "absent"), // Display 'absent' if status is not provided
+          render: (text, record) => (record[`lecture${lectureNumber}`] ? record[`lecture${lectureNumber}`] : "absent"),
         }));
+
 
         setLectureColumns(temp);
 
