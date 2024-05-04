@@ -10,6 +10,7 @@ const Course = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    setLoading(true);
     const fetchDoctorData = async () => {
       const response = await getData(`courses/${id}`, doctorID);
       if (response.status === "success") {
@@ -18,7 +19,7 @@ const Course = () => {
       }
     };
     fetchDoctorData();
-  }, []);
+  }, [id]);
   return (
     <div className="grow">
       {loading ? (
