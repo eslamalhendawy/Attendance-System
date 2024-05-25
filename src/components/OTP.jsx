@@ -39,7 +39,7 @@ function OTP() {
 
   const handleResend = async () => {
     toast.info("Sending mail...");
-    let temp = await postData("/forgotPassword", { email });
+    let temp = await postData("doctors/forgotPassword", { email });
     if(temp.status === "success"){
       toast.success(temp.message);
     }

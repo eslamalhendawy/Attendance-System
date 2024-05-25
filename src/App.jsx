@@ -31,7 +31,7 @@ function App() {
     <>
       <Router>
         <Header />
-        <div className={loggedIn ? "flex gap-[40px] p-6 bg-[#EEF5FF]" : ""}>
+        <main className={loggedIn ? "flex gap-[40px] p-6 bg-[#EEF5FF]" : ""}>
           {userData.loggedIn && <SideMenu />}
           <Routes>
             <Route path="/" element={userData.loggedIn ? <HomePage /> : <Login />} />
@@ -43,7 +43,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/course-attendance/:id" element={<CourseAttendance />} />
           </Routes>
-        </div>
+        </main>
       </Router>
       <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />
     </>

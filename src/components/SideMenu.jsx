@@ -43,7 +43,7 @@ const SideMenu = () => {
             ) : (
               userData.courses.map((course, index) => (
                 <Link key={index} to={`/course/${course._id}`}>
-                  <li className="hover:bg-white duration-200 p-2 rounded-lg max-w-[180px] truncate capitalize">{course.courseName}</li>
+                  <li className="hover:bg-white duration-200 p-2 rounded-lg max-w-[180px] capitalize">{course.courseName}</li>
                 </Link>
               ))
             )}
