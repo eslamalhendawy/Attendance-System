@@ -34,7 +34,7 @@ const SideMenu = () => {
       <div className="flex flex-col justify-between flex-grow">
         <div>
           {/* <span className="font-[600] text-lg mb-4 block">My Courses</span> */}
-          <ul className="flex flex-col gap-4">
+          <ul className="flex flex-col gap-4 mb-4">
             <Link to="/">
               <li className="hover:bg-white duration-200 p-2 rounded-lg">Home</li>
             </Link>
