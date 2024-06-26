@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getData } from "../apiRequest/Services";
+import { getData, updateData } from "../apiRequest/Services";
 
 import Modal from "@mui/material/Modal";
 
@@ -20,6 +20,13 @@ const QrCode = ({ courseID }) => {
     };
     fetchQRCode();
   }, []);
+
+  const handleClose = async () => {
+    setOpen(false);
+    const response = await updateData(`doctors/closeQr/${id}`, {}, doctorID);
+    console.log(response);
+  };
+
   return (
     <>
       <button onClick={() => setOpen(true)} className="bg-accent hover:bg-primary duration-200 text-center py-3 px-6 rounded-lg text-white">
@@ -29,13 +36,11 @@ const QrCode = ({ courseID }) => {
         <div className="w-screen h-screen flex items-center justify-center">
           <div className="bg-white p-6 sm:p-12 shadow shadow-white rounded-xl w-[300px] sm:w-[450px]">
             <div className="text-right mb-4">
-              <i className="fa-solid fa-x text-xl text-[#d67a7a] hover:text-[#FF0000] duration-300 cursor-pointer" onClick={() => setOpen(false)}></i>
+              <i className="fa-solid fa-x text-xl text-[#d67a7a] hover:text-[#FF0000] duration-300 cursor-pointer" onClick={handleClose}></i>
             </div>
             <h4 className="text-center mb-4 font-bold text-2xl">Your QR Code is ready</h4>
             <p className="text-center text-lg text-[#606060] mb-6">scan the image below to preview your QR Code</p>
-            <div className="flex justify-center items-center">
-              {loading ? (<p className="text-center text-xl">Loading...</p>) : (<img src={qrCode} />)}
-            </div>
+            <div className="flex justify-center items-center">{loading ? <p className="text-center text-xl">Loading...</p> : <img src={qrCode} />}</div>
           </div>
         </div>
       </Modal>
