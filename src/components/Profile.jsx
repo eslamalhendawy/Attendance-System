@@ -22,13 +22,13 @@ const Profile = () => {
         </div>
         <div className="text-xl mt-6 mb-10 text-left">
           <span className="font-semibold">Courses:</span>{" "}
-          <span>
+          <div className="flex flex-wrap justify-center gap-2">
             {userData.courses.map((item, index) => (
               <span key={index} className="">
                 {item.courseName},
               </span>
             ))}
-          </span>
+          </div>
         </div>
         <ChangePassword />
       </div>
