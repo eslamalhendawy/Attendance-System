@@ -18,16 +18,16 @@ const Profile = () => {
                 <ChangeAvatar />
             </div>
             <div>
-                <div className="text-xl mt-6 text-left">
+                <div className="text-xl mt-6 text-left w-[80%] mx-auto">
                     <span className="font-semibold">Name:</span> <span className="capitalize">{userData.name}</span>
                 </div>
-                <div className="text-xl mt-6 text-left">
+                <div className="text-xl mt-6 text-left w-[80%] mx-auto">
                     <span className="font-semibold">Email:</span> <span className="">{userData.email}</span>
                 </div>
-                <div className="text-xl mt-6 mb-10 text-left">
+                <div className="text-xl mt-6 mb-10 text-left w-[80%] mx-auto">
                     <span className="font-semibold">Courses:</span>{" "}
-                    <div className="flex flex-wrap justify-center gap-2"> 
-                        <div className="flex flex-wrap gap-4 mb-8 w-[80%] mx-auto">
+                    <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-4 mb-8  mx-auto">
                             {userData.courses.map((course, index) => (
                                 <div className="text-white bg-[#575AA2] py-2 px-4 rounded-lg capitalize" key={index}>
                                     {course.courseName}
