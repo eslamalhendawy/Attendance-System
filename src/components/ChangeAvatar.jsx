@@ -34,7 +34,7 @@ const ChangeAvatar = () => {
         toast.error("Error updating profile photo, please try again");
       }
     } else {
-      const response = await updateData("doctors/uploadProfilePicture", formData, doctorID);
+      const response = await postData("doctors/uploadProfilePicture", formData, doctorID);
       console.log(response);
       if (response.status === "success") {
         toast.success(response.message);
