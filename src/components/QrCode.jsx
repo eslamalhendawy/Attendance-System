@@ -14,8 +14,8 @@ const QrCode = ({ courseID }) => {
     const fetchQRCode = async () => {
         const response = await getData(`doctors/takeAttendance/${courseID}/${id}`, doctorID)
         console.log(response)
-        setQrCode(response.data.qrCode)
         if (response.status === "success") {
+            setQrCode(response.data.qrCode)
             setLoading(false)
         }
     }
@@ -26,11 +26,13 @@ const QrCode = ({ courseID }) => {
     }
 
     const handleClose = async () => {
-        setOpen(false)
         const response = await updateData(`doctors/closeQr/${id}`, {}, doctorID)
-        setQrCode(null)
-        setLoading(true)
-        console.log(response)
+        if (response.status === "success") {
+            setOpen(false)
+            setQrCode(null)
+            setLoading(true)
+            console.log(response);
+        }
     }
 
     return (
